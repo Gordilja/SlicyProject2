@@ -5,7 +5,7 @@ public class Knife : MonoBehaviour
 {
 
     //The number of vertices to create per frame
-    private const int NUM_VERTICES = 12;
+    private const int NUM_VERTICES = 2;
 
     [SerializeField]
     [Tooltip("The empty game object located at the tip of the blade")]
@@ -79,12 +79,14 @@ public class Knife : MonoBehaviour
         _triangles[_frameCount + 3] = _frameCount + 3;
         _triangles[_frameCount + 4] = _frameCount + 4;
         _triangles[_frameCount + 5] = _frameCount + 5;
+        /*
         _triangles[_frameCount + 6] = _frameCount + 6;
         _triangles[_frameCount + 7] = _frameCount + 7;
         _triangles[_frameCount + 8] = _frameCount + 8;
         _triangles[_frameCount + 9] = _frameCount + 9;
         _triangles[_frameCount + 10] = _frameCount + 10;
         _triangles[_frameCount + 11] = _frameCount + 11;
+        */
 
         _mesh.vertices = _vertices;
         _mesh.triangles = _triangles;
