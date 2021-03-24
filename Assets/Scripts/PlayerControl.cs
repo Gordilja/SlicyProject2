@@ -2,22 +2,22 @@
 
 public class PlayerControl : MonoBehaviour
 {
-    Rigidbody rigidbody;
+    Rigidbody rb;
     int force = 100;
 
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("w"))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            rigidbody.AddForceAtPosition(Vector3.up * 10, Vector3.forward * force);
-            rigidbody.AddForce(Vector3.back * 100);
+            rb.AddForceAtPosition(Vector3.up * 10, Vector3.forward * force);
+            rb.AddForce(Vector3.back * 100);
             //transform.Translate(Vector3.forward * Time.deltaTime * 10);
         }
     }
