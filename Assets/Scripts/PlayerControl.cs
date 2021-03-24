@@ -3,8 +3,9 @@
 public class PlayerControl : MonoBehaviour
 {
     Rigidbody rb;
-    int force = 100;
-    int jumpforce = 150;
+    int force = 50;
+    int jumpforce = 300;
+    int i = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -24,19 +25,26 @@ public class PlayerControl : MonoBehaviour
             */
 
             rb.isKinematic = false;
-            rb.AddForceAtPosition(Vector3.up * 10, Vector3.forward * force);
-            rb.AddForce(Vector3.back * force);
+            rb.AddForceAtPosition(Vector3.up * 50, Vector3.forward * force);
+            rb.AddForce(Vector3.back * 150);
             rb.AddForce(Vector3.up * jumpforce);
         }
     }
 
     void OnTriggerEnter(Collider col)
     {
-        //if(col.tag == "Platform")
-            //rb.isKinematic = true;
+        if (col.tag == "Platform" && i < 1) 
+        {
+            rb.isKinematic = true;
+            i++;
+        }else if(i == 1) 
+        {
+            rb.isKinematic = false;
+            i--;
+        }
+           
     }
 
-    /*
     public void touchControl()
     {
         //Move to sides
@@ -53,5 +61,4 @@ public class PlayerControl : MonoBehaviour
             }
         }
     }
-    */
 }
