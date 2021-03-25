@@ -3,14 +3,18 @@
 public class PlayerControl : MonoBehaviour
 {
     Rigidbody rb;
-    int force = 10;
-    int jumpforce = 20;
+    int force = 3;
+    int jumpforce = 15;
     int i = 0;
     float gravityModifier = 2;
 
     Animator animation;
     int isTapHash;
 
+    private void Awake()
+    {
+        
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -26,17 +30,20 @@ public class PlayerControl : MonoBehaviour
         bool isClicked = Input.GetKeyDown(KeyCode.Mouse0);
         bool isMoving = animation.GetBool(isTapHash);
 
+        //transform.Translate(Vector3.forward * Time.deltaTime * force);
+
         if (isClicked)
         {
             rb.isKinematic = false;
             //rb.AddTorque(0f, 0f, -1000, ForceMode.Impulse);
             rb.AddForce(Vector3.back * force, ForceMode.Impulse);
             rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
+            
             animation.SetBool(isTapHash, true);
         } 
         else if (!isClicked) 
         {
-            animation.SetBool(isTapHash, false);
+            //animation.SetBool(isTapHash, false);
         }
     }
 
@@ -45,6 +52,7 @@ public class PlayerControl : MonoBehaviour
         if (col.tag == "Platform" && i < 1) 
         {
             rb.isKinematic = true;
+            animation.SetBool(isTapHash, false);
             i++;
         }else if(i == 1) 
         {
@@ -63,9 +71,11 @@ public class PlayerControl : MonoBehaviour
 
             if (touch.phase == TouchPhase.Moved)
             {
-                rb.AddTorque(0f, 0f, -1000, ForceMode.Impulse);
+                rb.isKinematic = false;
+                //rb.AddTorque(0f, 0f, -1000, ForceMode.Impulse);
                 rb.AddForce(Vector3.back * force, ForceMode.Impulse);
                 rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
+                animation.SetBool(isTapHash, true);
             }
         }
     }
