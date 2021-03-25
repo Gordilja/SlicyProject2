@@ -100,6 +100,7 @@ public class Knife : MonoBehaviour
         _triggerEnterTipPosition = _tip.transform.position;
         _triggerEnterBasePosition = _base.transform.position;
     }
+    /*
     void particles(Collider other, Color color)
     {
         //splash effect
@@ -108,17 +109,9 @@ public class Knife : MonoBehaviour
 
         main.startColor = color;
     }
-
+    */
     private void OnTriggerExit(Collider other)
     {
-        if (other.transform.CompareTag("melon"))
-        {
-            particles(other, Color.green);
-        }
-        else if (other.transform.CompareTag("apple"))
-        {
-            particles(other, Color.red);
-        }
 
         _triggerExitTipPosition = _tip.transform.position;
 

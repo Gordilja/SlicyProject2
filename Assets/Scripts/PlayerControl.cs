@@ -3,33 +3,40 @@
 public class PlayerControl : MonoBehaviour
 {
     Rigidbody rb;
-    int force = 50;
-    int jumpforce = 300;
+    int force = 10;
+    int jumpforce = 20;
     int i = 0;
+    float gravityModifier = 2;
+
+    Animator animation;
+    int isTapHash;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        animation = GetComponent<Animator>();
+        isTapHash = Animator.StringToHash("isTap");
+        Physics.gravity *= gravityModifier;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        bool isClicked = Input.GetKeyDown(KeyCode.Mouse0);
+        bool isMoving = animation.GetBool(isTapHash);
+
+        if (isClicked)
         {
             rb.isKinematic = false;
-
-            /*
-            rb.AddTorque(0f, 0f, -500, ForceMode.Impulse);
-            rb.AddForce(Vector3.back * force);
-            rb.AddForce(Vector3.up * jumpforce);
-            */
-
-
-            rb.AddForceAtPosition(Vector3.up * 50, Vector3.forward * force);
-            rb.AddForce(Vector3.back * 150);
-            rb.AddForce(Vector3.up * jumpforce);
+            //rb.AddTorque(0f, 0f, -1000, ForceMode.Impulse);
+            rb.AddForce(Vector3.back * force, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
+            animation.SetBool(isTapHash, true);
+        } 
+        else if (!isClicked) 
+        {
+            animation.SetBool(isTapHash, false);
         }
     }
 
@@ -45,7 +52,8 @@ public class PlayerControl : MonoBehaviour
         }
            
     }
-
+    #region 
+    /*
     public void touchControl()
     {
         //Move to sides
@@ -55,11 +63,12 @@ public class PlayerControl : MonoBehaviour
 
             if (touch.phase == TouchPhase.Moved)
             {
-                rb.isKinematic = false;
-                rb.AddForceAtPosition(Vector3.up * 10, Vector3.forward * force);
-                rb.AddForce(Vector3.back * force);
-                rb.AddForce(Vector3.up * jumpforce);
+                rb.AddTorque(0f, 0f, -1000, ForceMode.Impulse);
+                rb.AddForce(Vector3.back * force, ForceMode.Impulse);
+                rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
             }
         }
     }
+    */
+    #endregion
 }
