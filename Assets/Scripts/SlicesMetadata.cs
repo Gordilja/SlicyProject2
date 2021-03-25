@@ -9,18 +9,12 @@ using UnityEngine.UIElements;
 
 namespace Assets.Scripts
 {
-    /// <summary>
-    /// The side of the mesh
-    /// </summary>
     public enum MeshSide
     {
         Positive = 0,
         Negative = 1
     }
 
-    /// <summary>
-    /// An object used to manage the positive and negative side mesh data for a sliced object
-    /// </summary>
     class SlicesMetadata
     {
         private Mesh _positiveSideMesh;
@@ -105,17 +99,6 @@ namespace Assets.Scripts
             ComputeNewMeshes();
         }
 
-        /// <summary>
-        /// Add the mesh data to the correct side and calulate normals
-        /// </summary>
-        /// <param name="side"></param>
-        /// <param name="vertex1"></param>
-        /// <param name="vertex1Uv"></param>
-        /// <param name="vertex2"></param>
-        /// <param name="vertex2Uv"></param>
-        /// <param name="vertex3"></param>
-        /// <param name="vertex3Uv"></param>
-        /// <param name="shareVertices"></param>
         private void AddTrianglesNormalAndUvs(MeshSide side, Vector3 vertex1, Vector3? normal1, Vector2 uv1, Vector3 vertex2, Vector3? normal2, Vector2 uv2, Vector3 vertex3, Vector3? normal3, Vector2 uv3, bool shareVertices, bool addFirst)
         {
             if (side == MeshSide.Positive)
@@ -128,26 +111,6 @@ namespace Assets.Scripts
             }
         }
 
-
-        /// <summary>
-        /// Adds the vertices to the mesh sets the triangles in the order that the vertices are provided.
-        /// If shared vertices is false vertices will be added to the list even if a matching vertex already exists
-        /// Does not compute normals
-        /// </summary>
-        /// <param name="vertices"></param>
-        /// <param name="triangles"></param>
-        /// <param name="uvs"></param>
-        /// <param name="normals"></param>
-        /// <param name="vertex1"></param>
-        /// <param name="vertex1Uv"></param>
-        /// <param name="normal1"></param>
-        /// <param name="vertex2"></param>
-        /// <param name="vertex2Uv"></param>
-        /// <param name="normal2"></param>
-        /// <param name="vertex3"></param>
-        /// <param name="vertex3Uv"></param>
-        /// <param name="normal3"></param>
-        /// <param name="shareVertices"></param>
         private void AddTrianglesNormalsAndUvs(ref List<Vector3> vertices, ref List<int> triangles, ref List<Vector3> normals, ref List<Vector2> uvs, Vector3 vertex1, Vector3? normal1, Vector2 uv1, Vector3 vertex2, Vector3? normal2, Vector2 uv2, Vector3 vertex3, Vector3? normal3, Vector2 uv3, bool shareVertices, bool addFirst)
         {
             int tri1Index = vertices.IndexOf(vertex1);
@@ -253,10 +216,6 @@ namespace Assets.Scripts
             }
         }
 
-        /// <summary>
-        /// Will render the inside of an object
-        /// This is heavy as it duplicates all the vertices and creates opposite winding direction
-        /// </summary>
         private void AddReverseTriangleWinding()
         {
             int positiveVertsStartIndex = _positiveSideVertices.Count;

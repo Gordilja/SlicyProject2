@@ -281,10 +281,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1007920546}
     m_Modifications:
-    - target: {fileID: 5428337616987200162, guid: 74dec4f52eb7f614eb7640197bee062e, type: 3}
-      propertyPath: m_Mass
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 5881111753339330818, guid: 74dec4f52eb7f614eb7640197bee062e, type: 3}
       propertyPath: m_Name
       value: knife
@@ -518,7 +514,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8027468369654033741, guid: e3615a57b2f2fc946b3eaeaddd389fb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 8027468369654033741, guid: e3615a57b2f2fc946b3eaeaddd389fb6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -661,7 +657,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8027468369654033741, guid: e3615a57b2f2fc946b3eaeaddd389fb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 8027468369654033741, guid: e3615a57b2f2fc946b3eaeaddd389fb6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -875,7 +871,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8027468369654033741, guid: e3615a57b2f2fc946b3eaeaddd389fb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.040600896
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8027468369654033741, guid: e3615a57b2f2fc946b3eaeaddd389fb6, type: 3}
       propertyPath: m_LocalPosition.y

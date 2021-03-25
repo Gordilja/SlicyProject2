@@ -18,13 +18,15 @@ public class PlayerControl : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            rb.isKinematic = false;
+
             /*
             rb.AddTorque(0f, 0f, -500, ForceMode.Impulse);
             rb.AddForce(Vector3.back * force);
             rb.AddForce(Vector3.up * jumpforce);
             */
 
-            rb.isKinematic = false;
+
             rb.AddForceAtPosition(Vector3.up * 50, Vector3.forward * force);
             rb.AddForce(Vector3.back * 150);
             rb.AddForce(Vector3.up * jumpforce);
@@ -39,7 +41,6 @@ public class PlayerControl : MonoBehaviour
             i++;
         }else if(i == 1) 
         {
-            rb.isKinematic = false;
             i--;
         }
            

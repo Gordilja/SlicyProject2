@@ -1,11 +1,11 @@
 ﻿using Assets.Scripts;
 using UnityEngine;
-
 public class Knife : MonoBehaviour
 {
+    public GameObject splashEffect;
 
     //The number of vertices to create per frame
-    private const int NUM_VERTICES = 2;
+    private const int NUM_VERTICES = 12;
 
     [SerializeField]
     [Tooltip("The empty game object located at the tip of the blade")]
@@ -79,14 +79,12 @@ public class Knife : MonoBehaviour
         _triangles[_frameCount + 3] = _frameCount + 3;
         _triangles[_frameCount + 4] = _frameCount + 4;
         _triangles[_frameCount + 5] = _frameCount + 5;
-        /*
         _triangles[_frameCount + 6] = _frameCount + 6;
         _triangles[_frameCount + 7] = _frameCount + 7;
         _triangles[_frameCount + 8] = _frameCount + 8;
         _triangles[_frameCount + 9] = _frameCount + 9;
         _triangles[_frameCount + 10] = _frameCount + 10;
         _triangles[_frameCount + 11] = _frameCount + 11;
-        */
 
         _mesh.vertices = _vertices;
         _mesh.triangles = _triangles;
@@ -102,9 +100,26 @@ public class Knife : MonoBehaviour
         _triggerEnterTipPosition = _tip.transform.position;
         _triggerEnterBasePosition = _base.transform.position;
     }
+    void particles(Collider other, Color color)
+    {
+        //splash effect
+        GameObject splashIns = Instantiate(splashEffect, other.transform.position, splashEffect.transform.rotation);
+        var main = splashIns.GetComponent<ParticleSystem>().main;
+
+        main.startColor = color;
+    }
 
     private void OnTriggerExit(Collider other)
     {
+        if (other.transform.CompareTag("melon"))
+        {
+            particles(other, Color.green);
+        }
+        else if (other.transform.CompareTag("apple"))
+        {
+            particles(other, Color.red);
+        }
+
         _triggerExitTipPosition = _tip.transform.position;
 
         //Create a triangle between the tip and base so that we can get the normal
@@ -134,5 +149,7 @@ public class Knife : MonoBehaviour
         Rigidbody rigidbody = slices[1].GetComponent<Rigidbody>();
         Vector3 newNormal = transformedNormal + Vector3.up * _forceAppliedToCut;
         rigidbody.AddForce(newNormal, ForceMode.Impulse);
+        slices[0].AddComponent<moveRightScript>();
+        slices[1].AddComponent<moveLeftScript>();
     }
 }
