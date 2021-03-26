@@ -4,11 +4,10 @@ public class PlayerControl : MonoBehaviour
 {
     Rigidbody rb;
     int force = 3;
-    int jumpforce = 15;
+    int jumpforce = 17;
     float gravityModifier = 2;
     bool move;
-
-    Animator animation;
+    private new Animator animation;
     int isTapHash;
 
     // Start is called before the first frame update
@@ -32,6 +31,7 @@ public class PlayerControl : MonoBehaviour
 
             if (isClicked)
             {
+                FindObjectOfType<GameManager>().play();
                 GetComponent<Animator>().enabled = true;
                 rb.isKinematic = false;
                 rb.AddForce(Vector3.back * force, ForceMode.Impulse);
@@ -61,6 +61,7 @@ public class PlayerControl : MonoBehaviour
             Debug.Log("Game Over");
             GetComponent<Animator>().enabled = false;
             rb.constraints = RigidbodyConstraints.None;
+            FindObjectOfType<GameManager>().gameEnd();
         }
         else if (col.tag == "Finish")
         {
@@ -68,6 +69,7 @@ public class PlayerControl : MonoBehaviour
             move = false;
             Debug.Log("FINISH!");
             GetComponent<Animator>().enabled = false;
+            FindObjectOfType<GameManager>().nextlvl();
         }
     }
     #region 
