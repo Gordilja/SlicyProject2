@@ -2,7 +2,7 @@
 
 public class moveLeftScript : MonoBehaviour
 {
-    private int force = 7;
+    private int force = 15;
     Rigidbody rb;
 
     private void Start()

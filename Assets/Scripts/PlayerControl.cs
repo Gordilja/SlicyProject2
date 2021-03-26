@@ -5,60 +5,61 @@ public class PlayerControl : MonoBehaviour
     Rigidbody rb;
     int force = 3;
     int jumpforce = 15;
-    int i = 0;
     float gravityModifier = 2;
+    bool move;
 
     Animator animation;
     int isTapHash;
 
-    private void Awake()
-    {
-        
-    }
     // Start is called before the first frame update
     void Start()
     {
+        move = true;
         rb = GetComponent<Rigidbody>();
         animation = GetComponent<Animator>();
         isTapHash = Animator.StringToHash("isTap");
         Physics.gravity *= gravityModifier;
+        rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
     }
 
     // Update is called once per frame
     void Update()
     {
-        bool isClicked = Input.GetKeyDown(KeyCode.Mouse0);
-        bool isMoving = animation.GetBool(isTapHash);
-
-        //transform.Translate(Vector3.forward * Time.deltaTime * force);
-
-        if (isClicked)
+        if (move == true) 
         {
-            rb.isKinematic = false;
-            //rb.AddTorque(0f, 0f, -1000, ForceMode.Impulse);
-            rb.AddForce(Vector3.back * force, ForceMode.Impulse);
-            rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
-            
-            animation.SetBool(isTapHash, true);
-        } 
-        else if (!isClicked) 
-        {
-            //animation.SetBool(isTapHash, false);
+            bool isClicked = Input.GetKeyDown(KeyCode.Mouse0);
+            bool isMoving = animation.GetBool(isTapHash);
+
+            if (isClicked)
+            {
+                rb.isKinematic = false;
+                rb.AddForce(Vector3.back * force, ForceMode.Impulse);
+                rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
+
+                animation.SetBool(isTapHash, true);
+            }
+            else if (!isClicked)
+            {
+                //animation.SetBool(isTapHash, false);
+            }
         }
+      
     }
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.tag == "Platform" && i < 1) 
+        if (col.tag == "Platform")
         {
             rb.isKinematic = true;
             animation.SetBool(isTapHash, false);
-            i++;
-        }else if(i == 1) 
-        {
-            i--;
         }
-           
+        else if (col.tag == "Plane") 
+        {
+            move = false;
+            Debug.Log("Game Over");  
+            animation.SetBool(isTapHash, false);
+            rb.constraints = RigidbodyConstraints.None;
+        }   
     }
     #region 
     /*
