@@ -32,6 +32,7 @@ public class PlayerControl : MonoBehaviour
 
             if (isClicked)
             {
+                GetComponent<Animator>().enabled = true;
                 rb.isKinematic = false;
                 rb.AddForce(Vector3.back * force, ForceMode.Impulse);
                 rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
@@ -52,12 +53,13 @@ public class PlayerControl : MonoBehaviour
         {
             rb.isKinematic = true;
             animation.SetBool(isTapHash, false);
+            GetComponent<Animator>().enabled = false;
         }
         else if (col.tag == "Plane") 
         {
             move = false;
-            Debug.Log("Game Over");  
-            animation.SetBool(isTapHash, false);
+            Debug.Log("Game Over");
+            GetComponent<Animator>().enabled = false;
             rb.constraints = RigidbodyConstraints.None;
         }   
     }

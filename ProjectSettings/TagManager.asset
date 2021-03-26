@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Platform
   - Blade
+  - Plane
   layers:
   - Default
   - TransparentFX
