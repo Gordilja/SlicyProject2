@@ -41,7 +41,7 @@ public class PlayerControl : MonoBehaviour
             }
             else if (!isClicked)
             {
-                //animation.SetBool(isTapHash, false);
+                //GetComponent<Animator>().enabled = false;
             }
         }
       
@@ -61,7 +61,14 @@ public class PlayerControl : MonoBehaviour
             Debug.Log("Game Over");
             GetComponent<Animator>().enabled = false;
             rb.constraints = RigidbodyConstraints.None;
-        }   
+        }
+        else if (col.tag == "Finish")
+        {
+            rb.isKinematic = true;
+            move = false;
+            Debug.Log("FINISH!");
+            GetComponent<Animator>().enabled = false;
+        }
     }
     #region 
     /*
