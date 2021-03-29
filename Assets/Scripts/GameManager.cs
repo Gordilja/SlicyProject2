@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject StartPanel;
     public GameObject RetryPanel;
     public GameObject NextlvlPanel;
-    private float waitTime = 0.1f;
+    private float waitTime = 0.6f;
     public TextMeshProUGUI scoretxt;
     int score;
 
@@ -25,12 +25,15 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
     }
 
+    #region Highscore
     public void highscore()
     {
         score++;
         scoretxt.text = score.ToString();
     }
+    #endregion
 
+    #region MainUses
     public void play()
     {
         Time.timeScale = 1;
@@ -48,6 +51,13 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void restartGame()
+    {
+        SceneManager.LoadSceneAsync("Level1");
+    }
+    #endregion
+
+    #region GameOver
     public void gameEnd()
     {
         StartCoroutine(waitAnim());
@@ -58,7 +68,9 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         RetryPanel.SetActive(true);
     }
+    #endregion
 
+    #region Nextlvl
     public void nextlvl()
     {
         NextlvlPanel.SetActive(true);
@@ -68,9 +80,5 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
     }
-
-    public void restartGame()
-    {
-        SceneManager.LoadSceneAsync("Level1");
-    }
+    #endregion Nextlvl
 }

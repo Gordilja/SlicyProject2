@@ -32,13 +32,10 @@ public class PlayerControl : MonoBehaviour
 
             if (isClicked)
             {
-                knife.GetComponent<Collider>().enabled = true;
                 rb.isKinematic = false;
                 animation.SetBool(isTapHash, true);
                 GetComponent<Animator>().enabled = true;
                 FindObjectOfType<GameManager>().play();
-                //GetComponent<Animator>().enabled = true;
-                //rb.isKinematic = false;
                 Vector3 temp = transform.position;
                 temp.y += 0.5f;
                 transform.position = temp;
@@ -58,8 +55,10 @@ public class PlayerControl : MonoBehaviour
     void OnTriggerEnter(Collider col)
     {
         if (col.tag == "Platform")
-        {   
-            StartCoroutine(delay());
+        {
+            rb.isKinematic = true;
+            animation.SetBool(isTapHash, false);
+            GetComponent<Animator>().enabled = false;
         }
         else if (col.tag == "Plane") 
         {
@@ -79,17 +78,7 @@ public class PlayerControl : MonoBehaviour
         }
        
     }
-
-    IEnumerator delay() 
-    {
-        rb.isKinematic = true;
-        animation.SetBool(isTapHash, false);
-        GetComponent<Animator>().enabled = false;
-        knife.GetComponent<Collider>().enabled = false;
-        yield return new WaitForSeconds(2);
-      
-    }
-    #region 
+    #region TouchControls
     /*
     public void touchControl()
     {
