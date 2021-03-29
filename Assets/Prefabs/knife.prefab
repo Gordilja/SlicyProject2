@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 5376483813302321367}
   - component: {fileID: 5428337616987200162}
   - component: {fileID: 919132147546701834}
-  - component: {fileID: 743241915533002458}
   - component: {fileID: 1038203086}
+  - component: {fileID: 7653003441251519922}
   m_Layer: 0
   m_Name: knife
   m_TagString: Blade
@@ -113,19 +113,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9af2669641a72b344a00b94f99599cd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &743241915533002458
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5881111753339330818}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.22079897, y: 0.3346675, z: 3.2625842}
-  m_Center: {x: -0.040600896, y: 0.52361333, z: 0.25043607}
 --- !u!95 &1038203086
 Animator:
   serializedVersion: 3
@@ -145,3 +132,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!136 &7653003441251519922
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5881111753339330818}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.1900383
+  m_Height: 3.4516525
+  m_Direction: 2
+  m_Center: {x: -0.031972826, y: 0.45384872, z: 0.27180028}

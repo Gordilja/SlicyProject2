@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class PlayerControl : MonoBehaviour
     bool move;
     private new Animator animation;
     int isTapHash;
-
+    public GameObject knife;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,9 +32,16 @@ public class PlayerControl : MonoBehaviour
 
             if (isClicked)
             {
-                FindObjectOfType<GameManager>().play();
-                GetComponent<Animator>().enabled = true;
+                knife.GetComponent<Collider>().enabled = true;
                 rb.isKinematic = false;
+                animation.SetBool(isTapHash, true);
+                GetComponent<Animator>().enabled = true;
+                FindObjectOfType<GameManager>().play();
+                //GetComponent<Animator>().enabled = true;
+                //rb.isKinematic = false;
+                Vector3 temp = transform.position;
+                temp.y += 0.5f;
+                transform.position = temp;
                 rb.AddForce(Vector3.back * force, ForceMode.Impulse);
                 rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
 
@@ -41,7 +49,7 @@ public class PlayerControl : MonoBehaviour
             }
             else if (!isClicked)
             {
-                //GetComponent<Animator>().enabled = false;
+               // animation.SetBool(isTapHash, false);
             }
         }
       
@@ -50,10 +58,8 @@ public class PlayerControl : MonoBehaviour
     void OnTriggerEnter(Collider col)
     {
         if (col.tag == "Platform")
-        {
-            rb.isKinematic = true;
-            animation.SetBool(isTapHash, false);
-            GetComponent<Animator>().enabled = false;
+        {   
+            StartCoroutine(delay());
         }
         else if (col.tag == "Plane") 
         {
@@ -71,6 +77,17 @@ public class PlayerControl : MonoBehaviour
             GetComponent<Animator>().enabled = false;
             FindObjectOfType<GameManager>().nextlvl();
         }
+       
+    }
+
+    IEnumerator delay() 
+    {
+        rb.isKinematic = true;
+        animation.SetBool(isTapHash, false);
+        GetComponent<Animator>().enabled = false;
+        knife.GetComponent<Collider>().enabled = false;
+        yield return new WaitForSeconds(2);
+      
     }
     #region 
     /*

@@ -628,6 +628,14 @@ PrefabInstance:
       propertyPath: m_Size.z
       value: 3.3354142
       objectReference: {fileID: 0}
+    - target: {fileID: 919132147546701834, guid: 74dec4f52eb7f614eb7640197bee062e, type: 3}
+      propertyPath: knife
+      value: 
+      objectReference: {fileID: 444408058}
+    - target: {fileID: 1545674299530225314, guid: 74dec4f52eb7f614eb7640197bee062e, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5428337616987200162, guid: 74dec4f52eb7f614eb7640197bee062e, type: 3}
       propertyPath: m_Constraints
       value: 0
@@ -687,6 +695,10 @@ PrefabInstance:
     - target: {fileID: 6545479952892574648, guid: 74dec4f52eb7f614eb7640197bee062e, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451194916846364061, guid: 74dec4f52eb7f614eb7640197bee062e, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74dec4f52eb7f614eb7640197bee062e, type: 3}
