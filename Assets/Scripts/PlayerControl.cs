@@ -32,22 +32,26 @@ public class PlayerControl : MonoBehaviour
 
             if (isClicked)
             {
-                rb.isKinematic = false;
+                FindObjectOfType<GameManager>().play();
+
+                //Animation
                 animation.SetBool(isTapHash, true);
                 GetComponent<Animator>().enabled = true;
-                FindObjectOfType<GameManager>().play();
+
+                //Movement
+                rb.isKinematic = false;
                 Vector3 temp = transform.position;
                 temp.y += 0.5f;
                 transform.position = temp;
                 rb.AddForce(Vector3.back * force, ForceMode.Impulse);
                 rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
-
-                animation.SetBool(isTapHash, true);
             }
+            /*
             else if (!isClicked)
             {
-               // animation.SetBool(isTapHash, false);
+                animation.SetBool(isTapHash, false);
             }
+            */
         }
       
     }

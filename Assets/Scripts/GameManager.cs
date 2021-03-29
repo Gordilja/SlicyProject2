@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
 
     public void restartGame()
     {
-        SceneManager.LoadSceneAsync("Level1");
+        SceneManager.LoadSceneAsync("Main");
     }
     #endregion
 
