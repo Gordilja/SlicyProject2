@@ -10,10 +10,14 @@ public class PlayerControl : MonoBehaviour
     bool move;
     private new Animator animation;
     int isTapHash;
-    public GameObject knife;
+    public GameObject blade;
+    //public GameObject tip;
+
     // Start is called before the first frame update
     void Start()
     {
+        blade.transform.gameObject.SetActive(false);
+        //tip.transform.gameObject.SetActive(false);
         move = true;
         rb = GetComponent<Rigidbody>();
         animation = GetComponent<Animator>();
@@ -49,7 +53,7 @@ public class PlayerControl : MonoBehaviour
         {
             StartCoroutine(stonk());
         }
-        else if (col.tag == "Plane") 
+        else if (col.tag == "Plane")
         {
             move = false;
             Debug.Log("Game Over");
@@ -65,6 +69,11 @@ public class PlayerControl : MonoBehaviour
             GetComponent<Animator>().enabled = false;
             FindObjectOfType<GameManager>().nextlvl();
         }
+        else if (col.tag == "Slice") 
+        {
+            StartCoroutine(slice());
+        }
+
     }
     IEnumerator stonk() 
     {
@@ -77,6 +86,16 @@ public class PlayerControl : MonoBehaviour
         rb.detectCollisions = true;
         this.GetComponent<Collider>().enabled = true;
     }
+
+    IEnumerator slice()
+    {
+        blade.transform.gameObject.SetActive(true);
+        //tip.transform.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.2f);
+        blade.transform.gameObject.SetActive(false);
+        //tip.transform.gameObject.SetActive(false);
+    }
+
     void tapanim() 
     {
         FindObjectOfType<GameManager>().play();
@@ -92,6 +111,9 @@ public class PlayerControl : MonoBehaviour
         transform.position = temp;
         rb.AddForce(Vector3.back * force, ForceMode.Impulse);
         rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
+
+        //Proba
+     
     }
     #region TouchControls
     /*

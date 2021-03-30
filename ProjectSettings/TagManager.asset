@@ -7,6 +7,8 @@ TagManager:
   - Platform
   - Blade
   - Plane
+  - Handle
+  - Slice
   layers:
   - Default
   - TransparentFX

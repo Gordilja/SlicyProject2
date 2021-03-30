@@ -15,18 +15,18 @@ AnimatorState:
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
+  m_WriteDefaultValues: 0
   m_Mirror: 0
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 1
+  m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 0cf8bb7c848be6b4bb6b18313538ac11, type: 2}
   m_Tag: 
-  m_SpeedParameter: 
+  m_SpeedParameter: isAir
   m_MirrorParameter: isTap
-  m_CycleOffsetParameter: Offset
-  m_TimeParameter: 
+  m_CycleOffsetParameter: isAir
+  m_TimeParameter: yes
 --- !u!1101 &-4535045926231588851
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -50,7 +50,7 @@ AnimatorStateTransition:
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
-  m_OrderedInterruption: 1
+  m_OrderedInterruption: 0
   m_CanTransitionToSelf: 1
 --- !u!1102 &-658646005190454901
 AnimatorState:
