@@ -32,19 +32,7 @@ public class PlayerControl : MonoBehaviour
 
             if (isClicked)
             {
-                FindObjectOfType<GameManager>().play();
-
-                //Animation
-                animation.SetBool(isTapHash, true);
-                GetComponent<Animator>().enabled = true;
-
-                //Movement
-                rb.isKinematic = false;
-                Vector3 temp = transform.position;
-                temp.y += 0.5f;
-                transform.position = temp;
-                rb.AddForce(Vector3.back * force, ForceMode.Impulse);
-                rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
+                tapanim();
             }
             /*
             else if (!isClicked)
@@ -53,16 +41,13 @@ public class PlayerControl : MonoBehaviour
             }
             */
         }
-      
     }
 
     void OnTriggerEnter(Collider col)
     {
         if (col.tag == "Platform")
         {
-            rb.isKinematic = true;
-            animation.SetBool(isTapHash, false);
-            GetComponent<Animator>().enabled = false;
+            StartCoroutine(stonk());
         }
         else if (col.tag == "Plane") 
         {
@@ -80,7 +65,33 @@ public class PlayerControl : MonoBehaviour
             GetComponent<Animator>().enabled = false;
             FindObjectOfType<GameManager>().nextlvl();
         }
-       
+    }
+    IEnumerator stonk() 
+    {
+        rb.isKinematic = true;
+        animation.SetBool(isTapHash, false);
+        GetComponent<Animator>().enabled = false;
+        rb.detectCollisions = false;
+        this.GetComponent<Collider>().enabled = false;
+        yield return new WaitForSeconds(0.5f);
+        rb.detectCollisions = true;
+        this.GetComponent<Collider>().enabled = true;
+    }
+    void tapanim() 
+    {
+        FindObjectOfType<GameManager>().play();
+
+        //Animation
+        animation.SetBool(isTapHash, true);
+        GetComponent<Animator>().enabled = true;
+
+        //Movement
+        rb.isKinematic = false;
+        Vector3 temp = transform.position;
+        temp.y += 0.5f;
+        transform.position = temp;
+        rb.AddForce(Vector3.back * force, ForceMode.Impulse);
+        rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
     }
     #region TouchControls
     /*
