@@ -28,5 +28,11 @@ public class Sliced : MonoBehaviour
 			Destroy(gameObject);
 			FindObjectOfType<GameManager>().highscore();
 		}
+		/*
+		else if (col.tag == "Handle") 
+		{
+			FindObjectOfType<PlayerControl>().hit();
+		}
+		*/
 	}
 }
