@@ -5,8 +5,8 @@ public class PlayerControl : MonoBehaviour
 {
     Rigidbody rb;
     int force = 3;
-    int jumpforce = 17;
-    float gravityModifier = 2;
+    int jumpforce = 24;
+    float gravityModifier = 1.5f;
     bool move;
     private new Animator animation;
     int isTapHash;
@@ -31,8 +31,7 @@ public class PlayerControl : MonoBehaviour
         if (move == true) 
         {
             bool isClicked = Input.GetKeyDown(KeyCode.Mouse0);
-            bool isMoving = animation.GetBool(isTapHash);
-
+           
             if (isClicked)
             {
                 tapanim();
@@ -60,6 +59,15 @@ public class PlayerControl : MonoBehaviour
         }
 
     }
+
+    IEnumerator playerAnimation() 
+    {
+        animation.SetBool(isTapHash, true);
+        yield return new WaitForSeconds(0.61f);
+        animation.SetBool(isTapHash, false);
+        animation.enabled = false;
+    }
+
     public IEnumerator stonk() 
     {
         rb.isKinematic = true;
@@ -74,7 +82,8 @@ public class PlayerControl : MonoBehaviour
     public void stuck() 
     {
         rb.isKinematic = true;
-        animation.SetBool(isTapHash, false);
+        rb.AddForce(Vector3.forward * force, ForceMode.Impulse);
+        rb.AddForce(Vector3.up * 4, ForceMode.Impulse);
         StartCoroutine(stonk());
     }
 
@@ -82,9 +91,7 @@ public class PlayerControl : MonoBehaviour
     {
         move = false;
         rb.isKinematic = true;
-        animation.SetBool(isTapHash, false);
         Debug.Log("FINISH!");
-        animation.enabled = false;
         FindObjectOfType<GameManager>().nextlvl();
     }
 
@@ -94,6 +101,7 @@ public class PlayerControl : MonoBehaviour
         blade.transform.gameObject.SetActive(true);
         yield return new WaitForSeconds(0.2f);
         blade.transform.gameObject.SetActive(false);
+        animation.SetBool(isTapHash, true);
     }
 
     void tapanim() 
@@ -104,6 +112,7 @@ public class PlayerControl : MonoBehaviour
         //Animation
         animation.SetBool(isTapHash, true);
         animation.enabled = true;
+        StartCoroutine(playerAnimation());
 
         //Movement
         rb.isKinematic = false;
