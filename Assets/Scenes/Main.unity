@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 6365970}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1002,6 +1002,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8549019132317655458, guid: 74dec4f52eb7f614eb7640197bee062e, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9133181144215515835, guid: 74dec4f52eb7f614eb7640197bee062e, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -1016,6 +1020,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2747881549814097622, guid: 74dec4f52eb7f614eb7640197bee062e, type: 3}
+    - {fileID: 8549019132317655458, guid: 74dec4f52eb7f614eb7640197bee062e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 74dec4f52eb7f614eb7640197bee062e, type: 3}
 --- !u!1 &692139160
 GameObject:
@@ -2439,7 +2444,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8483213}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: restartGame
+        m_MethodName: retry
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Sliced : MonoBehaviour
 {
@@ -28,11 +26,5 @@ public class Sliced : MonoBehaviour
 			Destroy(gameObject);
 			FindObjectOfType<GameManager>().highscore();
 		}
-		/*
-		else if (col.tag == "Handle") 
-		{
-			FindObjectOfType<PlayerControl>().hit();
-		}
-		*/
 	}
 }

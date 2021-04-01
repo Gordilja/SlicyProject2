@@ -12,13 +12,11 @@ public class PlayerControl : MonoBehaviour
     int isTapHash;
     public GameObject blade;
     public GameObject handle;
-    //private bool hitHandle;
 
     // Start is called before the first frame update
     void Start()
     {
         blade.transform.gameObject.SetActive(false);
-        handle.transform.gameObject.SetActive(false);
         move = true;
         rb = GetComponent<Rigidbody>();
         animation = GetComponent<Animator>();
@@ -48,54 +46,49 @@ public class PlayerControl : MonoBehaviour
         {
             move = false;
             Debug.Log("Game Over");
-            GetComponent<Animator>().enabled = false;
+            animation.enabled = false;
             rb.constraints = RigidbodyConstraints.None;
             FindObjectOfType<GameManager>().gameEnd();
         }
         else if (col.tag == "Slice")
         {
             StartCoroutine(slice());
-        } 
-        /*
-        else if (col.tag == "Platform") 
-        {
-            stuck();
         }
-        */
+        else if (col.tag == "Platform" || col.tag == "Finish")
+        {
+            blade.transform.gameObject.SetActive(true);
+        }
 
     }
     public IEnumerator stonk() 
     {
-        GetComponent<Animator>().enabled = false;
+        rb.isKinematic = true;
+        animation.enabled = false;
         rb.detectCollisions = false;
         this.GetComponent<Collider>().enabled = false;
         yield return new WaitForSeconds(0.5f);
         rb.detectCollisions = true;
         this.GetComponent<Collider>().enabled = true;
     }
+
     public void stuck() 
     {
-        //rb.isKinematic = true;
+        rb.isKinematic = true;
         animation.SetBool(isTapHash, false);
-        blade.transform.gameObject.SetActive(true);
+        StartCoroutine(stonk());
     }
 
     public void finish() 
     {
         move = false;
+        rb.isKinematic = true;
+        animation.SetBool(isTapHash, false);
         Debug.Log("FINISH!");
-        //handle.transform.gameObject.SetActive(true);
-        GetComponent<Animator>().enabled = false;
+        animation.enabled = false;
         FindObjectOfType<GameManager>().nextlvl();
     }
-    /*
-    public IEnumerator hit() 
-    {
-        handle.transform.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1f);
-        handle.transform.gameObject.SetActive(false);
-    }
-    */
+
+
     IEnumerator slice()
     {
         blade.transform.gameObject.SetActive(true);
@@ -110,8 +103,7 @@ public class PlayerControl : MonoBehaviour
 
         //Animation
         animation.SetBool(isTapHash, true);
-        GetComponent<Animator>().enabled = true;
-        //StartCoroutine(hit());
+        animation.enabled = true;
 
         //Movement
         rb.isKinematic = false;
