@@ -35,10 +35,12 @@ public class PlayerControl : MonoBehaviour
         if (move == true) 
         {
             bool isClicked = Input.GetKeyDown(KeyCode.Mouse0);
-           
-            if (isClicked)
+            int touchNum = Input.touchCount;
+
+            if (isClicked || touchNum > 0)
             {
                 tapanim();
+                //StartCoroutine(playerAnimation());
             }
         }
     }
@@ -66,10 +68,11 @@ public class PlayerControl : MonoBehaviour
 
     IEnumerator playerAnimation() 
     {
-        animation.SetBool(isTapHash, true);
+        animation.enabled = true;
+        //animation.SetBool(isTapHash, true);
         yield return new WaitForSeconds(0.61f);
-        animation.SetBool(isTapHash, false);
-        //animation.enabled = false;
+        //animation.SetBool(isTapHash, false);
+        animation.enabled = false;
     }
 
     public IEnumerator stonk() 
@@ -146,24 +149,14 @@ public class PlayerControl : MonoBehaviour
     }
 
     #region TouchControls
-    /*
     public void touchControl()
     {
-        //Move to sides
-        if (Input.touchCount > 0)
-        {
             Touch touch = Input.GetTouch(0);
 
             if (touch.phase == TouchPhase.Moved)
             {
-                rb.isKinematic = false;
-                //rb.AddTorque(0f, 0f, -1000, ForceMode.Impulse);
-                rb.AddForce(Vector3.back * force, ForceMode.Impulse);
-                rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
-                animation.SetBool(isTapHash, true);
+                tapanim();
             }
-        }
     }
-    */
     #endregion
 }
