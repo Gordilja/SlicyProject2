@@ -69,7 +69,7 @@ public class PlayerControl : MonoBehaviour
         animation.SetBool(isTapHash, true);
         yield return new WaitForSeconds(0.61f);
         animation.SetBool(isTapHash, false);
-        animation.enabled = false;
+        //animation.enabled = false;
     }
 
     public IEnumerator stonk() 
@@ -96,6 +96,7 @@ public class PlayerControl : MonoBehaviour
         move = false;
         rb.isKinematic = true;
         Debug.Log("FINISH!");
+        animation.enabled = false;
         FindObjectOfType<GameManager>().nextlvl();
     }
 
@@ -114,6 +115,12 @@ public class PlayerControl : MonoBehaviour
         blade.transform.gameObject.SetActive(false);
 
         //Animation
+
+        animation.SetBool(isTapHash, true);
+        animation.enabled = true;
+        //StartCoroutine(playerAnimation());
+
+        /*
         if (rotationNum == rotationSet)
         {
             animation.SetBool(isTapHash, true);
@@ -127,7 +134,7 @@ public class PlayerControl : MonoBehaviour
             StartCoroutine(playerAnimation());
             player.transform.eulerAngles = new Vector3(11, player.transform.eulerAngles.y, player.transform.eulerAngles.z);
         }
-       
+       */
 
         //Movement
         rb.isKinematic = false;
