@@ -871,6 +871,10 @@ PrefabInstance:
       propertyPath: handle
       value: 
       objectReference: {fileID: 1572534483}
+    - target: {fileID: 919132147546701834, guid: 74dec4f52eb7f614eb7640197bee062e, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1982826251}
     - target: {fileID: 5881111753339330818, guid: 74dec4f52eb7f614eb7640197bee062e, type: 3}
       propertyPath: m_Name
       value: knife

@@ -12,11 +12,15 @@ public class PlayerControl : MonoBehaviour
     int isTapHash;
     public GameObject blade;
     public GameObject handle;
+    public GameObject player;
+    public float rotationNum;
+    public float rotationSet = 11;
 
     // Start is called before the first frame update
     void Start()
     {
         blade.transform.gameObject.SetActive(false);
+        rotationNum = player.transform.eulerAngles.x;
         move = true;
         rb = GetComponent<Rigidbody>();
         animation = GetComponent<Animator>();
@@ -110,9 +114,20 @@ public class PlayerControl : MonoBehaviour
         blade.transform.gameObject.SetActive(false);
 
         //Animation
-        animation.SetBool(isTapHash, true);
-        animation.enabled = true;
-        StartCoroutine(playerAnimation());
+        if (rotationNum == rotationSet)
+        {
+            animation.SetBool(isTapHash, true);
+            animation.enabled = true;
+            StartCoroutine(playerAnimation());
+        } 
+        else if (rotationNum != rotationSet)
+        {
+            //animation.SetBool(isTapHash, true);
+            animation.enabled = true;
+            StartCoroutine(playerAnimation());
+            player.transform.eulerAngles = new Vector3(11, player.transform.eulerAngles.y, player.transform.eulerAngles.z);
+        }
+       
 
         //Movement
         rb.isKinematic = false;
