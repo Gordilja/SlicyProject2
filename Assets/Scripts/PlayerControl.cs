@@ -37,10 +37,14 @@ public class PlayerControl : MonoBehaviour
             bool isClicked = Input.GetKeyDown(KeyCode.Mouse0);
             int touchNum = Input.touchCount;
 
-            if (isClicked || touchNum > 0)
+            if (isClicked)
             {
                 tapanim();
                 //StartCoroutine(playerAnimation());
+            } 
+            else if (touchNum > 0) 
+            {
+                touchControl();
             }
         }
     }
@@ -153,7 +157,7 @@ public class PlayerControl : MonoBehaviour
     {
             Touch touch = Input.GetTouch(0);
 
-            if (touch.phase == TouchPhase.Moved)
+            if (touch.phase == TouchPhase.Began)
             {
                 tapanim();
             }

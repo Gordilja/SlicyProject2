@@ -3,7 +3,7 @@
 public class CameraMove : MonoBehaviour
 {
     public GameObject player;
-    private Vector3 offset = new Vector3(-8, 5, 3);
+    private Vector3 offset = new Vector3(-12, 5, 5);
 
     void Update()
     {
