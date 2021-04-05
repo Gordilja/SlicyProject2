@@ -3,6 +3,7 @@
 public class Sliced : MonoBehaviour
 {
 	public GameObject slicedPrefab;
+	public GameObject cube;
 	public float startForce = 15f;
 
 	Rigidbody rb;
@@ -23,7 +24,7 @@ public class Sliced : MonoBehaviour
 
 			GameObject slicedObs = Instantiate(slicedPrefab, transform.position, rotation);
 			Destroy(slicedObs, 3f);
-			Destroy(gameObject);
+			Destroy(cube);
 			FindObjectOfType<GameManager>().highscore();
 		}
 	}

@@ -126,4 +126,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slicedPrefab: {fileID: 5368497268534232504, guid: a4ccd850f1657ac4595a5d8ab0f91a61, type: 3}
+  cube: {fileID: 8027468369654033737}
   startForce: 15
