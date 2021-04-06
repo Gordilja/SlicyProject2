@@ -3,24 +3,23 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    //Movement
     Rigidbody rb;
-    int force = 3;
-    int jumpforce = 24;
+    int force = 6;
+    int jumpforce = 15;
     float gravityModifier = 1.5f;
     bool move;
+    //Animation
     private new Animator animation;
     int isTapHash;
+    //Objects
     public GameObject blade;
     public GameObject handle;
-    public GameObject player;
-    public float rotationNum;
-    public float rotationSet = 11;
 
     // Start is called before the first frame update
     void Start()
     {
         blade.transform.gameObject.SetActive(false);
-        rotationNum = player.transform.eulerAngles.x;
         move = true;
         rb = GetComponent<Rigidbody>();
         animation = GetComponent<Animator>();
@@ -32,6 +31,7 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Controls
         if (move == true) 
         {
             bool isClicked = Input.GetKeyDown(KeyCode.Mouse0);
@@ -40,7 +40,6 @@ public class PlayerControl : MonoBehaviour
             if (isClicked)
             {
                 tapanim();
-                //StartCoroutine(playerAnimation());
             } 
             else if (touchNum > 0) 
             {
@@ -69,16 +68,7 @@ public class PlayerControl : MonoBehaviour
         }
 
     }
-
-    IEnumerator playerAnimation() 
-    {
-        animation.enabled = true;
-        //animation.SetBool(isTapHash, true);
-        yield return new WaitForSeconds(0.61f);
-        //animation.SetBool(isTapHash, false);
-        animation.enabled = false;
-    }
-
+    #region Platform collission action
     public IEnumerator stonk() 
     {
         rb.isKinematic = true;
@@ -97,7 +87,9 @@ public class PlayerControl : MonoBehaviour
         rb.AddForce(Vector3.up * 4, ForceMode.Impulse);
         StartCoroutine(stonk());
     }
+    #endregion
 
+    //Hit finish
     public void finish() 
     {
         move = false;
@@ -108,6 +100,7 @@ public class PlayerControl : MonoBehaviour
     }
 
 
+    //Slice object
     IEnumerator slice()
     {
         blade.transform.gameObject.SetActive(true);
@@ -116,32 +109,15 @@ public class PlayerControl : MonoBehaviour
         animation.SetBool(isTapHash, true);
     }
 
+    //Animation on controls
     void tapanim() 
     {
         FindObjectOfType<GameManager>().play();
         blade.transform.gameObject.SetActive(false);
 
         //Animation
-
         animation.SetBool(isTapHash, true);
         animation.enabled = true;
-        //StartCoroutine(playerAnimation());
-
-        /*
-        if (rotationNum == rotationSet)
-        {
-            animation.SetBool(isTapHash, true);
-            animation.enabled = true;
-            StartCoroutine(playerAnimation());
-        } 
-        else if (rotationNum != rotationSet)
-        {
-            //animation.SetBool(isTapHash, true);
-            animation.enabled = true;
-            StartCoroutine(playerAnimation());
-            player.transform.eulerAngles = new Vector3(11, player.transform.eulerAngles.y, player.transform.eulerAngles.z);
-        }
-       */
 
         //Movement
         rb.isKinematic = false;
