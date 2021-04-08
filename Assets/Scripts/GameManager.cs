@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
     }
     #endregion Nextlvl
 
+    #region Test level changer
     private static SaveData saveData;
     public static SaveData SaveData
     {
@@ -83,4 +84,23 @@ public class GameManager : MonoBehaviour
             saveData = value;
         }
     }
+
+    private static LevelManager levelManager;
+    public static LevelManager LevelManager
+    {
+        get
+        {
+            if (levelManager == null)
+            {
+                Debug.LogError("LevelManager does not exist in the scene.");
+            }
+            return levelManager;
+
+        }
+        set
+        {
+            levelManager = value;
+        }
+    }
+    #endregion
 }
