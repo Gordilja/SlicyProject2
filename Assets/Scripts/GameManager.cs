@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,13 +9,6 @@ public class GameManager : MonoBehaviour
     public GameObject RetryPanel;
     public GameObject NextlvlPanel;
     private float waitTime = 0.6f;
-    public TextMeshProUGUI scoretxt;
-    int score;
-
-    private void Start()
-    {
-        scoretxt.text = score.ToString();
-    }
 
     private void Awake()
     {
@@ -24,14 +16,6 @@ public class GameManager : MonoBehaviour
         RetryPanel.SetActive(false);
         Time.timeScale = 0;
     }
-
-    #region Highscore
-    public void highscore()
-    {
-        score++;
-        scoretxt.text = score.ToString();
-    }
-    #endregion
 
     #region MainUses
     public void play()
@@ -81,4 +65,22 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
     }
     #endregion Nextlvl
+
+    private static SaveData saveData;
+    public static SaveData SaveData
+    {
+        get
+        {
+            if (saveData == null)
+            {
+                Debug.LogError("SaveData does not exist in the scene.");
+            }
+            return saveData;
+
+        }
+        set
+        {
+            saveData = value;
+        }
+    }
 }

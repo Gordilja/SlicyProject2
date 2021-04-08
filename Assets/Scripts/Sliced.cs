@@ -25,7 +25,8 @@ public class Sliced : MonoBehaviour
 			GameObject slicedObs = Instantiate(slicedPrefab, transform.position, rotation);
 			Destroy(slicedObs, 3f);
 			Destroy(cube);
-			FindObjectOfType<GameManager>().highscore();
+			FindObjectOfType<SaveData>().scoreUp();
+			FindObjectOfType<SaveData>().score++;
 		}
 	}
 }

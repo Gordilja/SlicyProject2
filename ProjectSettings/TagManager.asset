@@ -9,6 +9,7 @@ TagManager:
   - Plane
   - Handle
   - Slice
+  - Score
   layers:
   - Default
   - TransparentFX
