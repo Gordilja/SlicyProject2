@@ -1,22 +1,35 @@
 ﻿using System.Collections;
 using UnityEngine;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
     public GameObject StartPanel;
     public GameObject RetryPanel;
     public GameObject NextlvlPanel;
+    public GameObject levelHolder;
     private float waitTime = 0.6f;
+    bool levelx = false;
+    int i = 0;
+    public CameraMove playerOnlvl;
 
     private void Awake()
     {
         StartPanel.SetActive(true);
         RetryPanel.SetActive(false);
         Time.timeScale = 0;
+        SpawnLevel();
     }
 
+    private void Update()
+    {
+        if (levelx) 
+        {
+           next();
+        }
+        
+    }
     #region MainUses
     public void play()
     {
@@ -60,9 +73,29 @@ public class GameManager : MonoBehaviour
         NextlvlPanel.SetActive(true);
     }
 
+    IEnumerator changelevel() 
+    {
+        levelHolder.transform.GetChild(i).gameObject.SetActive(false);
+        FindObjectOfType<CameraMove>().nextlevel = false;
+        yield return new WaitForSeconds(1f);
+        FindObjectOfType<CameraMove>().nextlevel = true;
+        i++;
+        SpawnLevel();
+    }
     public void next()
     {
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+        //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+        StartCoroutine(changelevel());
+        levelx = true;
+    }
+
+    public void SpawnLevel()
+    {
+        if (i <= 3)
+        {
+            levelHolder.transform.GetChild(i).gameObject.SetActive(true);
+            FindObjectOfType<SpawnPlayer>().spawnPlayer();
+        }
     }
     #endregion Nextlvl
 
@@ -82,24 +115,6 @@ public class GameManager : MonoBehaviour
         set
         {
             saveData = value;
-        }
-    }
-
-    private static LevelManager levelManager;
-    public static LevelManager LevelManager
-    {
-        get
-        {
-            if (levelManager == null)
-            {
-                Debug.LogError("LevelManager does not exist in the scene.");
-            }
-            return levelManager;
-
-        }
-        set
-        {
-            levelManager = value;
         }
     }
     #endregion

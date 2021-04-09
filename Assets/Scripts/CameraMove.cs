@@ -5,11 +5,16 @@ public class CameraMove : MonoBehaviour
     private Camera camera;
     public Transform target;
     private Vector3 offset = new Vector3(-6, 3, 5);
+    public bool nextlevel;
 
     void Start()
     {
-        camera = GetComponent<Camera>();
-        GetTargetByTag("Player");
+        if (nextlevel) 
+        {
+            camera = GetComponent<Camera>();
+            GetTargetByTag("Player");
+        }
+       
     }
 
     // Update is called once per frame
