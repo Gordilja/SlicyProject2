@@ -8,7 +8,7 @@ public class CameraMove : MonoBehaviour
     public bool nextlevel;
 
     void Start()
-    {
+    {   
         if (nextlevel) 
         {
             camera = GetComponent<Camera>();
@@ -26,6 +26,8 @@ public class CameraMove : MonoBehaviour
             transform.position = target.transform.position + offset; 
         }
 
+        if (target == null)
+            return;
     }
 
     /// Changes the target.

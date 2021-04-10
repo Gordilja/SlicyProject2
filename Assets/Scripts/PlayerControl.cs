@@ -96,6 +96,7 @@ public class PlayerControl : MonoBehaviour
         rb.isKinematic = true;
         Debug.Log("FINISH!");
         animation.enabled = false;
+        //Object.Destroy(gameObject);
         FindObjectOfType<GameManager>().nextlvl();
     }
 

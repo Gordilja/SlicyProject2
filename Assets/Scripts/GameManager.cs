@@ -12,14 +12,17 @@ public class GameManager : MonoBehaviour
     private float waitTime = 0.6f;
     bool levelx = false;
     int i = 0;
-    public CameraMove playerOnlvl;
+
+    private void Start()
+    {
+        SpawnLevel();
+    }
 
     private void Awake()
     {
         StartPanel.SetActive(true);
         RetryPanel.SetActive(false);
-        Time.timeScale = 0;
-        SpawnLevel();
+        Time.timeScale = 0;   
     }
 
     private void Update()
@@ -75,10 +78,12 @@ public class GameManager : MonoBehaviour
 
     IEnumerator changelevel() 
     {
-        levelHolder.transform.GetChild(i).gameObject.SetActive(false);
-        FindObjectOfType<CameraMove>().nextlevel = false;
-        yield return new WaitForSeconds(1f);
-        FindObjectOfType<CameraMove>().nextlevel = true;
+        levelHolder.transform.GetChild(i).gameObject.SetActive(false);  
+        //FindObjectOfType<CameraMove>().nextlevel = false;
+        yield return new WaitForSeconds(0.1f);
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+        //FindObjectOfType<CameraMove>().nextlevel = true;
+        //FindObjectOfType<SpawnPlayer>().player.SetActive(true);
         i++;
         SpawnLevel();
     }
@@ -86,6 +91,8 @@ public class GameManager : MonoBehaviour
     {
         //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
         StartCoroutine(changelevel());
+        
+        //FindObjectOfType<SpawnPlayer>().player.SetActive(false);
         levelx = true;
     }
 
@@ -94,7 +101,7 @@ public class GameManager : MonoBehaviour
         if (i <= 3)
         {
             levelHolder.transform.GetChild(i).gameObject.SetActive(true);
-            FindObjectOfType<SpawnPlayer>().spawnPlayer();
+            //FindObjectOfType<SpawnPlayer>().spawnPlayer();
         }
     }
     #endregion Nextlvl
