@@ -7,7 +7,7 @@ public class SaveData : MonoBehaviour
 {
     public int level = 1;
     public int achievedLevel = 1;
-    public int score = 0;
+    public int score;
     public TextMeshProUGUI scoreNum;
 
     private void Awake()
@@ -31,7 +31,16 @@ public class SaveData : MonoBehaviour
     public void scoreUp() 
     {
         scoreNum.text = score.ToString();
-        score++;
+        if (score < 1)
+        {
+            score = 1;
+            //score++;
+        }
+        else 
+        {
+            score++;
+        }
+        
     }
 
     public void SaveScore()
@@ -50,12 +59,13 @@ public class SaveData : MonoBehaviour
     {
         PlayerPrefs.GetInt("AchievedLevel", achievedLevel);
     }
-
+    /*
     public void LoadScore()
     {
         PlayerPrefs.GetInt("Score", score);
         
     }
+    */
     #endregion
 
     #region Functions

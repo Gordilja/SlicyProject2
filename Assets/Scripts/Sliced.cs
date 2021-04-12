@@ -12,6 +12,8 @@ public class Sliced : MonoBehaviour
 	{
 		rb = GetComponent<Rigidbody>();
 		rb.AddForce(transform.up * startForce, ForceMode.Impulse);
+		if(FindObjectOfType<SaveData>().score < 1)
+			FindObjectOfType<SaveData>().score = 1;
 	}
 
 	void OnTriggerEnter(Collider col)
