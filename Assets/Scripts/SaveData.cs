@@ -31,16 +31,7 @@ public class SaveData : MonoBehaviour
     public void scoreUp() 
     {
         scoreNum.text = score.ToString();
-        if (score < 1)
-        {
-            score = 1;
-            //score++;
-        }
-        else 
-        {
-            score++;
-        }
-        
+        score++;
     }
 
     public void SaveScore()

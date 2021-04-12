@@ -15,7 +15,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        //Transform[] levelHolder;
         SpawnLevel();
+        //levelHolder = gameObject.GetComponentsInChildren<Transform>();
+        //Debug.Log(levelHolder.Length);
     }
 
     private void Awake()
@@ -88,11 +91,11 @@ public class GameManager : MonoBehaviour
 
     IEnumerator changelevel() 
     {
-        
         GameObject obj = GameObject.FindWithTag("Player");
         Destroy(obj);
+        levelHolder.transform.GetChild(i).gameObject.SetActive(false);
         NextlvlPanel.SetActive(false);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
         i++;
         SpawnLevel();
     }
@@ -100,7 +103,6 @@ public class GameManager : MonoBehaviour
     {
         //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
         StartCoroutine(changelevel());   
-        levelHolder.transform.GetChild(i).gameObject.SetActive(false);
         levelx = true;
     }
 
@@ -109,7 +111,7 @@ public class GameManager : MonoBehaviour
         if (i <= 3)
         {
             levelHolder.transform.GetChild(i).gameObject.SetActive(true);
-            //FindObjectOfType<SpawnPlayer>().spawnPlayer();
+            FindObjectOfType<SpawnPlayer>().spawnPlayer();
         }
     }
     #endregion Nextlvl
