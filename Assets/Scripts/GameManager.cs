@@ -88,19 +88,19 @@ public class GameManager : MonoBehaviour
 
     IEnumerator changelevel() 
     {
-        levelHolder.transform.GetChild(i).gameObject.SetActive(false);
+        
         GameObject obj = GameObject.FindWithTag("Player");
         Destroy(obj);
         NextlvlPanel.SetActive(false);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         i++;
         SpawnLevel();
     }
     public void next()
     {
         //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
-        StartCoroutine(changelevel());     
-        //FindObjectOfType<SpawnPlayer>().player.SetActive(false);
+        StartCoroutine(changelevel());   
+        levelHolder.transform.GetChild(i).gameObject.SetActive(false);
         levelx = true;
     }
 

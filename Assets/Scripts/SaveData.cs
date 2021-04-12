@@ -7,7 +7,7 @@ public class SaveData : MonoBehaviour
 {
     public int level = 1;
     public int achievedLevel = 1;
-    public int score;
+    public int score = 0;
     public TextMeshProUGUI scoreNum;
 
     private void Awake()
@@ -31,6 +31,7 @@ public class SaveData : MonoBehaviour
     public void scoreUp() 
     {
         scoreNum.text = score.ToString();
+        score++;
     }
 
     public void SaveScore()

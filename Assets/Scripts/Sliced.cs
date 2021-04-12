@@ -26,7 +26,6 @@ public class Sliced : MonoBehaviour
 			Destroy(slicedObs, 3f);
 			Destroy(cube);
 			FindObjectOfType<SaveData>().scoreUp();
-			FindObjectOfType<SaveData>().score++;
 		}
 	}
 }
