@@ -4,10 +4,10 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     //Movement
-    Rigidbody rb;
-    int force = 6;
+    public Rigidbody rb;
+    int force = 10;
     int jumpforce = 15;
-    float gravityModifier = 1.5f;
+    float gravityModifier = 1;
     bool move;
     //Animation
     private new Animator animation;
@@ -96,7 +96,6 @@ public class PlayerControl : MonoBehaviour
         rb.isKinematic = true;
         Debug.Log("FINISH!");
         animation.enabled = false;
-        //Object.Destroy(gameObject);
         FindObjectOfType<GameManager>().nextlvl();
     }
 

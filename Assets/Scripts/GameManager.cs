@@ -48,10 +48,17 @@ public class GameManager : MonoBehaviour
 
     public void retry()
     {
+        StartCoroutine(retrySpawn());
+        RetryPanel.SetActive(false);
+    }
+    IEnumerator retrySpawn() 
+    {
         GameObject obj = GameObject.FindWithTag("Player");
         Destroy(obj);
-        FindObjectOfType<SpawnPlayer>().spawnPlayer();
-        RetryPanel.SetActive(false);
+        yield return new WaitForSeconds(0.2f);
+        StartPanel.SetActive(true);
+        Time.timeScale = 0;
+        FindObjectOfType<SpawnPlayer>().spawnPlayer();    
     }
 
     public void restartGame()
@@ -84,8 +91,8 @@ public class GameManager : MonoBehaviour
         levelHolder.transform.GetChild(i).gameObject.SetActive(false);
         GameObject obj = GameObject.FindWithTag("Player");
         Destroy(obj);
-        yield return new WaitForSeconds(0.1f);
         NextlvlPanel.SetActive(false);
+        yield return new WaitForSeconds(0.1f);
         i++;
         SpawnLevel();
     }
