@@ -5,8 +5,8 @@ using TMPro;
 
 public class SaveData : MonoBehaviour
 {
-    /*[BoxGroup("Data")]*/ public int level = 1;
-    /*[BoxGroup("Data")]*/public int achievedLevel = 1;
+    public int level = 1;
+    public int achievedLevel = 1;
     public int score;
     public TextMeshProUGUI scoreNum;
 

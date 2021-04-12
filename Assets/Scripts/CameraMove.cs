@@ -2,7 +2,7 @@
 
 public class CameraMove : MonoBehaviour
 {
-    private Camera camera;
+    private  Camera m_camera;
     public Transform target;
     private Vector3 offset = new Vector3(-6, 3, 5);
     public bool nextlevel;
@@ -11,7 +11,7 @@ public class CameraMove : MonoBehaviour
     {   
         if (nextlevel) 
         {
-            camera = GetComponent<Camera>();
+            m_camera = GetComponent<Camera>();
             GetTargetByTag("Player");
         }
        

@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     {
         if (levelx) 
         {
-           next();
+            next();
         }
         
     }
@@ -48,7 +48,10 @@ public class GameManager : MonoBehaviour
 
     public void retry()
     {
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+        GameObject obj = GameObject.FindWithTag("Player");
+        Destroy(obj);
+        FindObjectOfType<SpawnPlayer>().spawnPlayer();
+        RetryPanel.SetActive(false);
     }
 
     public void restartGame()
@@ -78,20 +81,18 @@ public class GameManager : MonoBehaviour
 
     IEnumerator changelevel() 
     {
-        levelHolder.transform.GetChild(i).gameObject.SetActive(false);  
-        //FindObjectOfType<CameraMove>().nextlevel = false;
+        levelHolder.transform.GetChild(i).gameObject.SetActive(false);
+        GameObject obj = GameObject.FindWithTag("Player");
+        Destroy(obj);
         yield return new WaitForSeconds(0.1f);
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
-        //FindObjectOfType<CameraMove>().nextlevel = true;
-        //FindObjectOfType<SpawnPlayer>().player.SetActive(true);
+        NextlvlPanel.SetActive(false);
         i++;
         SpawnLevel();
     }
     public void next()
     {
         //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
-        StartCoroutine(changelevel());
-        
+        StartCoroutine(changelevel());     
         //FindObjectOfType<SpawnPlayer>().player.SetActive(false);
         levelx = true;
     }
