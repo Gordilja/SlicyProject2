@@ -4,7 +4,7 @@ public class CameraMove : MonoBehaviour
 {
     private  Camera m_camera;
     public Transform target;
-    private Vector3 offset = new Vector3(-7, 5, 5);
+    private Vector3 offset = new Vector3(-7, 5, 6);
     public bool nextlevel;
 
     void Start()

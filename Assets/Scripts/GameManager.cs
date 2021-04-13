@@ -9,9 +9,9 @@ public class GameManager : MonoBehaviour
     public GameObject RetryPanel;
     public GameObject NextlvlPanel;
     public GameObject levelHolder;
+    public GameObject RestartPanel;
     private float waitTime = 0.6f;
-    //bool levelx = false;
-    int i = 0;
+    public int i = 0;
 
     private void Start()
     {
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
     {
         GameObject obj = GameObject.FindWithTag("Player");
         Destroy(obj);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         StartPanel.SetActive(true);
         Time.timeScale = 0;
         FindObjectOfType<SpawnPlayer>().spawnPlayer();    
@@ -65,12 +65,18 @@ public class GameManager : MonoBehaviour
         Destroy(obj);
         levelHolder.transform.GetChild(i).gameObject.SetActive(false);
         NextlvlPanel.SetActive(false);
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
         yield return new WaitForSeconds(0.2f);
         i = 0;
         levelHolder.transform.GetChild(i).gameObject.SetActive(true);
         FindObjectOfType<SpawnPlayer>().spawnPlayer();
         StartPanel.SetActive(true);
         Time.timeScale = 0;
+    }
+    public void restartG() 
+    {
+        StartCoroutine(restartGame());
+        RestartPanel.SetActive(false);
     }
     #endregion
 
@@ -98,7 +104,7 @@ public class GameManager : MonoBehaviour
         GameObject obj = GameObject.FindWithTag("Player");
         Destroy(obj);
         levelHolder.transform.GetChild(i).gameObject.SetActive(false);
-        NextlvlPanel.SetActive(false);
+        NextlvlPanel.SetActive(false); 
         yield return new WaitForSeconds(0.2f);
         i++;
         levelHolder.transform.GetChild(i).gameObject.SetActive(true);
@@ -107,17 +113,15 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
     }
     public void next()
-    {
-        //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+    {   
         if (i < 3)
         {
             StartCoroutine(changelevel());
         }
         else 
-        {
+        {   
             StartCoroutine(restartGame());
         }
-        //levelx = true;
     }
 
     public void SpawnLevel()
@@ -138,7 +142,6 @@ public class GameManager : MonoBehaviour
                 Debug.LogError("SaveData does not exist in the scene.");
             }
             return saveData;
-
         }
         set
         {

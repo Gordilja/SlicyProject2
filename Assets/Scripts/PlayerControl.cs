@@ -48,6 +48,11 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    IEnumerator vibrate()
+    {
+        Handheld.Vibrate();
+        yield return new WaitForSeconds(0.1f);
+    }
     void OnTriggerEnter(Collider col)
     {
         if (col.tag == "Plane")
@@ -65,6 +70,7 @@ public class PlayerControl : MonoBehaviour
         else if (col.tag == "Platform" || col.tag == "Finish")
         {
             blade.transform.gameObject.SetActive(true);
+            StartCoroutine(vibrate());
         }
 
     }
@@ -92,11 +98,22 @@ public class PlayerControl : MonoBehaviour
     //Hit finish
     public void finish()
     {
-        move = false;
-        rb.isKinematic = true;
-        Debug.Log("FINISH!");
-        animation.enabled = false;
-        FindObjectOfType<GameManager>().nextlvl();
+        if (FindObjectOfType<GameManager>().i < 3)
+        {
+            move = false;
+            rb.isKinematic = true;
+            Debug.Log("FINISH!");
+            animation.enabled = false;
+            FindObjectOfType<GameManager>().nextlvl();
+        }
+        else 
+        {
+            move = false;
+            rb.isKinematic = true;
+            Debug.Log("FINISH!");
+            animation.enabled = false;
+            FindObjectOfType<GameManager>().RestartPanel.SetActive(true);
+        }
     }
 
     //Slice object
