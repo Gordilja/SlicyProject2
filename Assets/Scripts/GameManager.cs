@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject NextlvlPanel;
     public GameObject levelHolder;
     private float waitTime = 0.6f;
-    bool levelx = false;
+    //bool levelx = false;
     int i = 0;
 
     private void Start()
@@ -28,14 +28,6 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;   
     }
 
-    private void Update()
-    {
-        if (levelx) 
-        {
-            next();
-        }
-        
-    }
     #region MainUses
     public void play()
     {
@@ -44,16 +36,19 @@ public class GameManager : MonoBehaviour
         RetryPanel.SetActive(false);
     }
 
+    /*
     public void quit()
     {
         Application.Quit();
     }
+    */
 
     public void retry()
     {
         StartCoroutine(retrySpawn());
         RetryPanel.SetActive(false);
     }
+
     IEnumerator retrySpawn() 
     {
         GameObject obj = GameObject.FindWithTag("Player");
@@ -64,9 +59,18 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<SpawnPlayer>().spawnPlayer();    
     }
 
-    public void restartGame()
+    IEnumerator restartGame()
     {
-        SceneManager.LoadSceneAsync("Main");
+        GameObject obj = GameObject.FindWithTag("Player");
+        Destroy(obj);
+        levelHolder.transform.GetChild(i).gameObject.SetActive(false);
+        NextlvlPanel.SetActive(false);
+        yield return new WaitForSeconds(0.2f);
+        i = 0;
+        levelHolder.transform.GetChild(i).gameObject.SetActive(true);
+        FindObjectOfType<SpawnPlayer>().spawnPlayer();
+        StartPanel.SetActive(true);
+        Time.timeScale = 0;
     }
     #endregion
 
@@ -95,24 +99,31 @@ public class GameManager : MonoBehaviour
         Destroy(obj);
         levelHolder.transform.GetChild(i).gameObject.SetActive(false);
         NextlvlPanel.SetActive(false);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         i++;
-        SpawnLevel();
+        levelHolder.transform.GetChild(i).gameObject.SetActive(true);
+        FindObjectOfType<SpawnPlayer>().spawnPlayer();
+        StartPanel.SetActive(true);
+        Time.timeScale = 0;
     }
     public void next()
     {
         //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
-        StartCoroutine(changelevel());   
-        levelx = true;
+        if (i < 3)
+        {
+            StartCoroutine(changelevel());
+        }
+        else 
+        {
+            StartCoroutine(restartGame());
+        }
+        //levelx = true;
     }
 
     public void SpawnLevel()
-    {
-        if (i <= 3)
-        {
+    {   
             levelHolder.transform.GetChild(i).gameObject.SetActive(true);
             FindObjectOfType<SpawnPlayer>().spawnPlayer();
-        }
     }
     #endregion Nextlvl
 

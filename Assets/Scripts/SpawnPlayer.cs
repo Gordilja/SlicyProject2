@@ -8,12 +8,7 @@ public class SpawnPlayer : MonoBehaviour
     private Vector3 spawnPos;
     float positionY = 6.5f;
     float positionZ = 6.0f;
-    /*
-    private void Start()
-    {
-        spawnPlayer();
-    }
-    */
+
     public void spawnPlayer()
     {
         spawnPos = new Vector3(0, positionY, positionZ);

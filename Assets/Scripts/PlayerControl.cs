@@ -32,7 +32,7 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
         //Controls
-        if (move == true) 
+        if (move == true)
         {
             bool isClicked = Input.GetKeyDown(KeyCode.Mouse0);
             int touchNum = Input.touchCount;
@@ -40,8 +40,8 @@ public class PlayerControl : MonoBehaviour
             if (isClicked)
             {
                 tapanim();
-            } 
-            else if (touchNum > 0) 
+            }
+            else if (touchNum > 0)
             {
                 touchControl();
             }
@@ -69,7 +69,7 @@ public class PlayerControl : MonoBehaviour
 
     }
     #region Platform collission action
-    public IEnumerator stonk() 
+    public IEnumerator stonk()
     {
         rb.isKinematic = true;
         animation.enabled = false;
@@ -80,7 +80,7 @@ public class PlayerControl : MonoBehaviour
         this.GetComponent<Collider>().enabled = true;
     }
 
-    public void stuck() 
+    public void stuck()
     {
         rb.isKinematic = true;
         rb.AddForce(Vector3.forward * force, ForceMode.Impulse);
@@ -90,7 +90,7 @@ public class PlayerControl : MonoBehaviour
     #endregion
 
     //Hit finish
-    public void finish() 
+    public void finish()
     {
         move = false;
         rb.isKinematic = true;
@@ -98,7 +98,6 @@ public class PlayerControl : MonoBehaviour
         animation.enabled = false;
         FindObjectOfType<GameManager>().nextlvl();
     }
-
 
     //Slice object
     IEnumerator slice()
