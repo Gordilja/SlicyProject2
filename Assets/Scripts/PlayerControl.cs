@@ -70,7 +70,7 @@ public class PlayerControl : MonoBehaviour
         else if (col.tag == "Platform" || col.tag == "Finish")
         {
             blade.transform.gameObject.SetActive(true);
-            StartCoroutine(vibrate());
+            //StartCoroutine(vibrate());
         }
 
     }
